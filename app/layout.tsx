@@ -7,6 +7,7 @@ const inter = Inter({
     variable: "--font-inter",
     subsets: ["latin"],
     display: "swap",
+    fallback : ["system-ui", "sans-serif"],
 });
 
 
@@ -23,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased`}
+        className={`${inter.variable} ${inter.className} antialiased`}
       >
         {children}
       </body>
