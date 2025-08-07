@@ -37,7 +37,10 @@ export const getProducts = async (params?: ProductsSearchParams): Promise<Produc
         }
         let whereClause;
         if (categories && categories.length > 0) {
-            whereClause = inArray(products.category, categories);
+            const transformedCategories = categories.map(category =>
+                category.replace(/-/g, ' ')
+            );
+            whereClause = inArray(products.category, transformedCategories);
         }
 
 

@@ -17,6 +17,8 @@ export default async function ProductsPage({searchParams}: PageProps) {
 
     const products = await getProducts()
 
+    console.log(products)
+
     return (
         <>
             <div className="flex flex-col-reverse md:flex-row gap-4 items-end  md:justify-between">
