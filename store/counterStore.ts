@@ -2,15 +2,21 @@ import {create} from "zustand"
 
 interface CounterState {
     counter: number;
-
-    increment: () => void;
-    decrement: () => void;
+    actions: {
+        increment: (number?: number) => void;
+        decrement: (number?: number) => void;
+    }
 }
 
 
 const useCounterStore = create<CounterState>()(set => ({
     counter: 0,
-    increment: () => set((state) => ({counter: state.counter + 1})),
-    decrement: () => set((state) => ({counter: state.counter - 1})),
-
+    actions: {
+        increment: (number) => set((state) => ({counter: state.counter + (number ? number : 1)})),
+        decrement: (number) => set((state) => ({counter: state.counter - (number ? number : 1)})),
+    }
 }))
+
+
+export const useCounter = () => useCounterStore((state) => state.counter)
+export const useCounterActions = () => useCounterStore((state) => state.actions)
