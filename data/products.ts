@@ -14,13 +14,6 @@ export const getProducts = unstable_cache(
         const {sort, page = 1, categories} = params || {}
 
 
-        console.log(`🔍 Cache MISS - Fetching products:`, {
-            page,
-            sort,
-            categories,
-            timestamp: new Date().toISOString()
-        });
-
         try {
             const limit = 10;
             const offset = (page - 1) * limit;

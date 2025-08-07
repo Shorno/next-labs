@@ -36,7 +36,7 @@ export default function FilterSidebar() {
     };
 
     return (
-        <div className="w-60 space-y-6">
+        <div className="md:w-60 space-y-6">
             <Card className={"rounded-xs"}>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-lg font-semibold">Categories</CardTitle>

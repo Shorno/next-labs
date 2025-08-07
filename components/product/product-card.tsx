@@ -1,15 +1,20 @@
-import { Star, ShoppingCart } from 'lucide-react'
+"use client"
+import {Star, ShoppingCart} from 'lucide-react'
 import {Button} from "@/components/ui/button"
 import {Card} from "@/components/ui/card"
 import {Badge} from "@/components/ui/badge"
 import Image from "next/image"
 import {type Product} from "@/db/schema/product-schema";
+import {useCartActions} from "@/store/cartStore";
 
 interface ProductCardProps {
     product: Product
 }
 
 export default function ProductCard({product}: ProductCardProps) {
+    const {addItem} = useCartActions()
+
+
     const renderStars = (rating: number) => {
         return [...Array(5)].map((_, i) => (
             <Star
@@ -27,8 +32,14 @@ export default function ProductCard({product}: ProductCardProps) {
     const numericRating = parseFloat(product.rating) || 0
     const isLowStock = product.stock < 10
     const isOutOfStock = product.stock === 0
+
+    // const handleAddToCart = () => {
+    //     console.log(`Adding ${product.title} to cart`);
+    // }
+
     return (
-        <Card className="w-full max-w-sm mx-auto overflow-hidden hover:shadow-sm transition-shadow duration-200 flex flex-col shadow-xs p-0 rounded-md">
+        <Card
+            className="w-full max-w-sm mx-auto overflow-hidden hover:shadow-sm transition-shadow duration-200 flex flex-col shadow-xs p-0 rounded-md">
             <div className="relative bg-white p-4">
                 <Image
                     src={product.image || "/placeholder.svg?height=260&width=256"}
@@ -50,7 +61,6 @@ export default function ProductCard({product}: ProductCardProps) {
             </div>
 
             <div className="p-4 flex flex-col flex-grow -mt-8">
-                {/* This div contains all content that should push the button down */}
                 <div className="flex-grow">
                     <h3 className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight mb-2">
                         {product.title}
@@ -88,8 +98,8 @@ export default function ProductCard({product}: ProductCardProps) {
                     </div>
                 </div>
 
-                {/* Add to Cart Button - pushed to the bottom */}
                 <Button
+                    onClick={() => addItem(product)}
                     className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-medium disabled:bg-gray-300 disabled:text-gray-500"
                     disabled={isOutOfStock}
                 >

@@ -6,6 +6,7 @@ import {loadSearchParams} from "@/lib/searchParams";
 import {getProducts} from "@/data/products";
 import ProductsSort from "@/components/product/products-sort";
 import ProductsSortSkeleton from "@/components/product/ProductsSortSkeleton";
+import MobileFilterDrawer from "@/components/product/mobile-filter-drawer";
 
 interface PageProps {
     searchParams: Promise<SearchParams>
@@ -22,6 +23,9 @@ export default async function ProductsPage({searchParams}: PageProps) {
             <div className="flex flex-col-reverse md:flex-row gap-4 items-end  md:justify-between">
                 <div className="text-sm text-muted-foreground">
                     Showing {products?.length} results
+                </div>
+                <div className="sm:hidden">
+                    <MobileFilterDrawer />
                 </div>
                 <Suspense fallback={<ProductsSortSkeleton/>}>
                     <ProductsSort/>
