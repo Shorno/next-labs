@@ -35,7 +35,7 @@ export default function ProductCard({product}: ProductCardProps) {
                     alt={product.title}
                     width={260}
                     height={256}
-                    className="w-full h-52 object-contain"
+                    className="w-full h-40 object-contain"
                 />
                 {isLowStock && !isOutOfStock && (
                     <Badge className="absolute top-2 right-2 bg-orange-500 hover:bg-orange-600 text-white text-xs">
@@ -49,7 +49,7 @@ export default function ProductCard({product}: ProductCardProps) {
                 )}
             </div>
 
-            <div className="p-4 flex flex-col flex-grow">
+            <div className="p-4 flex flex-col flex-grow -mt-8">
                 {/* This div contains all content that should push the button down */}
                 <div className="flex-grow">
                     <h3 className="text-sm font-medium text-gray-900 line-clamp-2 leading-tight mb-2">
