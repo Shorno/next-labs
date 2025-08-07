@@ -2,9 +2,12 @@ import ProductCard from "./product-card"
 import {getProducts, ProductsSearchParams} from "@/data/products";
 import PaginationControls from "./pagination-controls";
 
+interface ProductGridProps {
+    searchParams: ProductsSearchParams;
+}
 
-export default async function ProductGrid({page, sort, categories}: ProductsSearchParams) {
-    const products = await getProducts({sort, page, categories})
+export default async function ProductGrid({searchParams}: ProductGridProps) {
+    const products = await getProducts(searchParams)
 
     if (!products) {
         return (

@@ -13,11 +13,9 @@ interface PageProps {
 
 
 export default async function ProductsPage({searchParams}: PageProps) {
-    const {page, sort, categories} = await loadSearchParams(searchParams)
+    const searchParamsData = await loadSearchParams(searchParams)
 
     const products = await getProducts()
-
-    console.log(products)
 
     return (
         <>
@@ -29,8 +27,8 @@ export default async function ProductsPage({searchParams}: PageProps) {
                     <ProductsSort/>
                 </Suspense>
             </div>
-            <Suspense fallback={<ProductGridSkeleton/>} key={page}>
-                <ProductGrid page={page} sort={sort} categories={categories}/>
+            <Suspense fallback={<ProductGridSkeleton/>} key={searchParamsData.page}>
+                <ProductGrid searchParams={searchParamsData}/>
             </Suspense>
         </>
     );
