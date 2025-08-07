@@ -5,6 +5,7 @@ import {SearchParams} from "nuqs";
 import {loadSearchParams} from "@/lib/searchParams";
 import {getProducts} from "@/data/products";
 import ProductsSort from "@/components/product/products-sort";
+import ProductsSortSkeleton from "@/components/product/ProductsSortSkeleton";
 
 interface PageProps {
     searchParams: Promise<SearchParams>
@@ -19,7 +20,9 @@ export default async function ProductsPage({searchParams}: PageProps) {
     return (
         <>
             <div className="flex items-center justify-between mb-6">
-                <ProductsSort/>
+                <Suspense fallback={<ProductsSortSkeleton/>}>
+                    <ProductsSort/>
+                </Suspense>
                 <div className="text-sm text-muted-foreground">
                     Showing {products?.length} results
                 </div>

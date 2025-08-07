@@ -1,5 +1,7 @@
-import SearchBar from "@/components/product/search-bar";
 import FilterSidebar from "@/components/product/filter-sidebar";
+import {Suspense} from "react";
+import FilterSidebarSkeleton from "@/components/product/FilterSidebarSkeleton";
+import SearchBar from "@/components/product/search-bar";
 import MobileFilterDrawer from "@/components/product/mobile-filter-drawer";
 
 export default function ProductsLayout({
@@ -25,7 +27,9 @@ export default function ProductsLayout({
                 <div className="flex gap-8">
                     <aside className="hidden lg:block flex-shrink-0">
                         <div className="sticky top-8">
-                            <FilterSidebar/>
+                            <Suspense fallback={<FilterSidebarSkeleton/>}>
+                                <FilterSidebar/>
+                            </Suspense>
                         </div>
                     </aside>
 
