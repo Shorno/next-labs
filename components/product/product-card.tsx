@@ -29,7 +29,7 @@ export default function ProductCard({product}: ProductCardProps) {
     const isOutOfStock = product.stock === 0
     return (
         <Card className="w-full max-w-sm mx-auto overflow-hidden hover:shadow-sm transition-shadow duration-200 flex flex-col shadow-xs p-0 rounded-md">
-            <div className="relative bg-white p-4 aspect-square">
+            <div className="relative bg-white p-4">
                 <Image
                     src={product.image || "/placeholder.svg?height=260&width=256"}
                     alt={product.title}
@@ -49,7 +49,6 @@ export default function ProductCard({product}: ProductCardProps) {
                 )}
             </div>
 
-            {/* Content and Button Section - this will be a flex column that grows */}
             <div className="p-4 flex flex-col flex-grow">
                 {/* This div contains all content that should push the button down */}
                 <div className="flex-grow">
@@ -79,9 +78,6 @@ export default function ProductCard({product}: ProductCardProps) {
                             <>
                                 <p className="font-medium text-green-700">
                                     ✓ In Stock ({product.stock} available)
-                                </p>
-                                <p className="mt-1">
-                                    FREE delivery <span className="font-medium">Tomorrow</span>
                                 </p>
                             </>
                         ) : (

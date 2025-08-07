@@ -19,15 +19,14 @@ export default async function ProductsPage({searchParams}: PageProps) {
 
     return (
         <>
-            <div className="flex items-center justify-between mb-6">
-                <Suspense fallback={<ProductsSortSkeleton/>}>
-                    <ProductsSort/>
-                </Suspense>
+            <div className="flex flex-col-reverse md:flex-row gap-4 items-end  md:justify-between">
                 <div className="text-sm text-muted-foreground">
                     Showing {products?.length} results
                 </div>
+                <Suspense fallback={<ProductsSortSkeleton/>}>
+                    <ProductsSort/>
+                </Suspense>
             </div>
-
             <Suspense fallback={<ProductGridSkeleton/>} key={page}>
                 <ProductGrid page={page} sort={sort} categories={categories}/>
             </Suspense>
