@@ -15,12 +15,13 @@ import SingleCartItem from "@/app/(product)/_components/single-cart-item";
 import {Badge} from "@/components/ui/badge";
 
 export default function Cart() {
-    const cart = useCartItems()
+    const cartItems = useCartItems()
+
+    console.log(cartItems)
     const totalQuantity = useCartTotalQuantity()
 
-    console.log(totalQuantity)
     const isCartOpen = useCartIsOpen()
-    const {setIsOpen} = useCartActions()
+    const {setIsOpen, clearCart} = useCartActions()
 
     return (
         <Sheet open={isCartOpen} onOpenChange={setIsOpen}>
@@ -44,13 +45,16 @@ export default function Cart() {
                     </SheetDescription>
                 </SheetHeader>
                 <div className={"overflow-auto"}>
-                    {cart.map((item, index) => (
-                        <SingleCartItem product={item} key={`${item.id}-${index}`}/>
+                    {cartItems.map((item, index) => (
+                        <SingleCartItem item={item} key={`${item.id}-${index}`}/>
                     ))}
                 </div>
                 <SheetFooter className={"mb-8"}>
                     <Button size={"lg"}>
                         Proceed to Checkout
+                    </Button>
+                    <Button size={"lg"} variant={"outline"} onClick={clearCart}>
+                        Clear Cart
                     </Button>
                 </SheetFooter>
             </SheetContent>
