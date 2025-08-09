@@ -1,7 +1,7 @@
 import Link from "next/link";
 import MobileFilterDrawer from "@/components/product/mobile-filter-drawer";
 import {SearchBar} from "@/components/product/search-bar";
-import Cart from "@/app/(product)/_components/cart";
+import Cart from "@/app/(frontend)/(product)/_components/cart";
 import {UserButton} from "@daveyplate/better-auth-ui";
 
 export default function Navbar() {
@@ -20,10 +20,10 @@ export default function Navbar() {
                     <div className="hidden md:block flex-1 max-w-md mx-8">
                         <SearchBar/>
                     </div>
-                 <div className={"flex justify-center items-center gap-4"}>
-                     <UserButton size={"icon"}/>
-                     <Cart/>
-                 </div>
+                    <div className={"flex justify-center items-center gap-4"}>
+                        <UserButton size={"icon"}/>
+                        <Cart/>
+                    </div>
                 </div>
 
                 {/* Mobile search bar */}

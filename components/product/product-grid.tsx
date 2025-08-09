@@ -1,15 +1,22 @@
 import ProductCard from "./product-card"
-import {getProducts, ProductsSearchParams} from "@/data/products";
 import PaginationControls from "./pagination-controls";
+import {getProducts} from "@/data/payload/payload";
 
-interface ProductGridProps {
-    searchParams: ProductsSearchParams;
-}
 
-export default async function ProductGrid({searchParams}: ProductGridProps) {
-    const products = await getProducts(searchParams)
+// type ProductsSearchParams = {
+//     page?: number;
+//     sort?: string;
+//     categories?: string[];
+// }
 
-    if (!products) {
+// interface ProductGridProps {
+//     searchParams: ProductsSearchParams;
+// }
+
+export default async function ProductGrid() {
+    const result = await getProducts()
+
+    if (!result) {
         return (
             <div className="container mx-auto px-4 md:px-0 py-8">
                 <h1 className="text-2xl font-bold text-gray-900 mb-4">No Products Found</h1>
@@ -17,7 +24,7 @@ export default async function ProductGrid({searchParams}: ProductGridProps) {
         )
     }
 
-    if (products.length === 0) {
+    if (result.totalDocs === 0) {
         return (
             <div className="container mx-auto  text-center px-4 py-8">
                 <h1 className="text-2xl font-bold text-gray-900 mb-4">No Products Found</h1>
@@ -30,7 +37,7 @@ export default async function ProductGrid({searchParams}: ProductGridProps) {
     return (
         <div className="container mx-auto px-4 md:px-0 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {products?.map((product) => (
+                {result.docs.map((product) => (
                     <ProductCard key={product.id} product={product}/>
                 ))}
             </div>

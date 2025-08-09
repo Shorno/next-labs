@@ -3,10 +3,10 @@ import {Suspense} from "react";
 import ProductGridSkeleton from "@/components/product/product-grid-skeleton";
 import {SearchParams} from "nuqs";
 import {loadSearchParams} from "@/lib/searchParams";
-import {getProducts} from "@/data/products";
 import ProductsSort from "@/components/product/products-sort";
 import ProductsSortSkeleton from "@/components/product/ProductsSortSkeleton";
 import MobileFilterDrawer from "@/components/product/mobile-filter-drawer";
+import {getProducts} from "@/data/payload/payload";
 
 interface PageProps {
     searchParams: Promise<SearchParams>
@@ -16,13 +16,13 @@ interface PageProps {
 export default async function ProductsPage({searchParams}: PageProps) {
     const searchParamsData = await loadSearchParams(searchParams)
 
-    const products = await getProducts()
+    const result = await getProducts()
 
     return (
         <>
             <div className="flex flex-col-reverse md:flex-row gap-4 items-end  md:justify-between">
                 <div className="text-sm text-muted-foreground">
-                    Showing {products?.length} results
+                    Showing {result.totalDocs} results
                 </div>
                 <div className="sm:hidden">
                     <MobileFilterDrawer />

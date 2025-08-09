@@ -12,6 +12,9 @@
   "dependencies": {
     "@daveyplate/better-auth-ui": "^2.1.11",
     "@neondatabase/serverless": "^1.0.1",
+    "@payloadcms/db-postgres": "^3.50.0",
+    "@payloadcms/next": "^3.50.0",
+    "@payloadcms/richtext-lexical": "^3.50.0",
     "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
@@ -24,8 +27,10 @@
     "lucide-react": "^0.536.0",
     "next": "15.4.5",
     "nuqs": "^2.4.3",
+    "payload": "^3.50.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "sharp": "^0.34.3",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "zustand": "^5.0.7"
@@ -41,5 +46,6 @@
     "tsx": "^4.20.3",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
-  }
+  },
+  "type": "module"
 }

@@ -1,6 +1,6 @@
-import {Product} from "@/db/schema/product-schema";
 import {create} from "zustand";
 import {persist, createJSONStorage,} from "zustand/middleware";
+import {Product} from "@/payload-types";
 
 export interface CartItem extends Product {
     quantity: number;

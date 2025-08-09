@@ -1,5 +1,5 @@
 import { authViewPaths } from "@daveyplate/better-auth-ui/server"
-import {AuthView} from "@/app/(auth)/auth/[pathname]/view";
+import {AuthView} from "@/app/(frontend)/(auth)/auth/[pathname]/view";
 
 
 export function generateStaticParams() {

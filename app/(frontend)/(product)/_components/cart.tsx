@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet"
 import {ShoppingCartIcon} from "lucide-react";
 import {useCartActions, useCartIsOpen, useCartItems, useCartTotalQuantity} from "@/store/cartStore";
-import SingleCartItem from "@/app/(product)/_components/single-cart-item";
+import SingleCartItem from "@/app/(frontend)/(product)/_components/single-cart-item";
 import {Badge} from "@/components/ui/badge";
 
 export default function Cart() {

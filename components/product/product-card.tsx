@@ -4,8 +4,8 @@ import {Button} from "@/components/ui/button"
 import {Card} from "@/components/ui/card"
 import {Badge} from "@/components/ui/badge"
 import Image from "next/image"
-import {type Product} from "@/db/schema/product-schema";
 import {useCartActions} from "@/store/cartStore";
+import {Product} from "@/payload-types";
 
 interface ProductCardProps {
     product: Product
@@ -29,20 +29,16 @@ export default function ProductCard({product}: ProductCardProps) {
             />
         ))
     }
-    const numericRating = parseFloat(product.rating) || 0
+    const numericRating = product.rating
     const isLowStock = product.stock < 10
     const isOutOfStock = product.stock === 0
-
-    // const handleAddToCart = () => {
-    //     console.log(`Adding ${product.title} to cart`);
-    // }
 
     return (
         <Card
             className="w-full max-w-sm mx-auto overflow-hidden hover:shadow-sm transition-shadow duration-200 flex flex-col shadow-xs p-0 rounded-md">
             <div className="relative bg-white p-4">
                 <Image
-                    src={product.image || "/placeholder.svg?height=260&width=256"}
+                    src={product.thumbnail || "/placeholder.svg?height=260&width=256"}
                     alt={product.title}
                     width={260}
                     height={256}
@@ -72,9 +68,6 @@ export default function ProductCard({product}: ProductCardProps) {
                                 <span className="text-sm text-gray-600 ml-2">
                                 {product.rating}</span>
                             </div>
-                            <span className="text-sm text-gray-600">
-                                ({product.totalRating.toLocaleString()} reviews)
-                            </span>
                         </div>
                     </div>
 

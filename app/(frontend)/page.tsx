@@ -1,5 +1,5 @@
-import {Banner} from "@/app/_components/Banner";
-import {CategoryCard} from "@/app/_components/CategoryCard";
+import {Banner} from "@/app/(frontend)/_components/Banner";
+import {CategoryCard} from "@/app/(frontend)/_components/CategoryCard";
 
 const categories = [
     {

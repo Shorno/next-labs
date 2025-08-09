@@ -1,10 +1,10 @@
 import type {Metadata} from "next";
 import {Inter} from "next/font/google";
-import "./globals.css";
+import "@/app/(frontend)/globals.css"
 import {NuqsAdapter} from "nuqs/adapters/next/app";
-import {Providers} from "@/app/providers";
+import {Providers} from "@/app/(frontend)/providers";
 import {Toaster} from "sonner";
-import Navbar from "@/app/(product)/_components/navbar";
+import Navbar from "@/components/layout/navbar";
 
 
 const inter = Inter({
