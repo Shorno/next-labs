@@ -1,5 +1,5 @@
 import { authViewPaths } from "@daveyplate/better-auth-ui/server"
-import {AuthView} from "@/app/auth/[pathname]/view";
+import {AuthView} from "@/app/(auth)/auth/[pathname]/view";
 
 
 export function generateStaticParams() {
@@ -9,5 +9,5 @@ export function generateStaticParams() {
 export default async function AuthPage({ params }: { params: Promise<{ pathname: string }> }) {
     const { pathname } = await params
 
-    return <AuthView pathname={pathname} />
+    return <AuthView pathname={pathname}/>
 }

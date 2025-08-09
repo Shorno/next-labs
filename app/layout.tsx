@@ -4,6 +4,7 @@ import "./globals.css";
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 import {Providers} from "@/app/providers";
 import {Toaster} from "sonner";
+import Navbar from "@/app/(product)/_components/navbar";
 
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
         >
         <Providers>
             <NuqsAdapter>
+                <Navbar/>
                 {children}
                 <Toaster position={"bottom-right"}/>
             </NuqsAdapter>
