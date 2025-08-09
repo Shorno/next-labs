@@ -32,7 +32,7 @@ export default async function ProductsPage({searchParams}: PageProps) {
                 </Suspense>
             </div>
             <Suspense fallback={<ProductGridSkeleton/>} key={searchParamsData.page}>
-                <ProductGrid searchParams={searchParamsData}/>
+                <ProductGrid/>
             </Suspense>
         </>
     );

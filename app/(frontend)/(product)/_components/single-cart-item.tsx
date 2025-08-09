@@ -18,7 +18,7 @@ export default function SingleCartItem({item}: CartItemProps) {
             <div className="flex-shrink-0 relative">
                 <div className="relative overflow-hidden rounded-lg border-2 border-gray-100">
                     <Image
-                        src={item.image || "/placeholder.svg"}
+                        src={item.thumbnail || "/placeholder.svg"}
                         alt={item.title}
                         width={80}
                         height={80}
