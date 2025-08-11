@@ -15,20 +15,21 @@ export default function ProductCard({product}: ProductCardProps) {
     const {addItem} = useCartActions()
 
 
-    const renderStars = (rating: number) => {
-        return [...Array(5)].map((_, i) => (
-            <Star
-                key={i}
-                className={`w-4 h-4 ${
-                    i < Math.floor(rating)
-                        ? "fill-yellow-400 text-yellow-400"
-                        : i === Math.floor(rating) && rating % 1 !== 0
-                            ? "fill-yellow-400/50 text-yellow-400"
-                            : "text-gray-300"
-                }`}
-            />
-        ))
-    }
+ const renderStars = (rating: number | null | undefined) => {
+     const safeRating = rating ?? 0;
+     return [...Array(5)].map((_, i) => (
+         <Star
+             key={i}
+             className={`w-4 h-4 ${
+                 i < Math.floor(safeRating)
+                     ? "fill-yellow-400 text-yellow-400"
+                     : i === Math.floor(safeRating) && safeRating % 1 !== 0
+                         ? "fill-yellow-400/50 text-yellow-400"
+                         : "text-gray-300"
+             }`}
+         />
+     ))
+ }
     const numericRating = product.rating
     const isLowStock = product.stock < 10
     const isOutOfStock = product.stock === 0
