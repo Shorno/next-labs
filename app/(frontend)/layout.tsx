@@ -30,14 +30,14 @@ export default function RootLayout({
         <body
             className={`${inter.variable} ${inter.className} antialiased`}
         >
-        <Providers>
-            <NuqsAdapter>
+        <NuqsAdapter>
+
+            <Providers>
                 <Navbar/>
                 {children}
                 <Toaster position={"bottom-right"}/>
-            </NuqsAdapter>
-        </Providers>
-
+            </Providers>
+        </NuqsAdapter>
         </body>
         </html>
     );

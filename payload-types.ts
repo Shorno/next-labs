@@ -70,6 +70,13 @@ export interface Config {
     media: Media;
     products: Product;
     categories: Category;
+    brands: Brand;
+    processors: Processor;
+    'screen-sizes': ScreenSize;
+    'ram-options': RamOption;
+    'storage-options': StorageOption;
+    networks: Network;
+    colors: Color;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +87,13 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    processors: ProcessorsSelect<false> | ProcessorsSelect<true>;
+    'screen-sizes': ScreenSizesSelect<false> | ScreenSizesSelect<true>;
+    'ram-options': RamOptionsSelect<false> | RamOptionsSelect<true>;
+    'storage-options': StorageOptionsSelect<false> | StorageOptionsSelect<true>;
+    networks: NetworksSelect<false> | NetworksSelect<true>;
+    colors: ColorsSelect<false> | ColorsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -138,13 +152,10 @@ export interface Product {
   id: number;
   title: string;
   /**
-   * Select a category for this product
+   * Select product category
    */
   category: number | Category;
-  /**
-   * Auto-generated from title
-   */
-  slug: string;
+  sku: string;
   description?: {
     root: {
       type: string;
@@ -160,10 +171,39 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
+  shortDescription: string;
   price: number;
   stock: number;
-  rating: number;
+  status: 'in_stock' | 'out_of_stock' | 'preorder';
+  rating?: number | null;
+  totalReviews?: number | null;
+  bestseller?: boolean | null;
+  featured?: boolean | null;
+  newArrival?: boolean | null;
+  onSale?: boolean | null;
+  images?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   thumbnail: string;
+  specifications: {
+    brand: number | Brand;
+    screenSize: number | ScreenSize;
+    ram: number | RamOption;
+    storage: number | StorageOption;
+    processor: number | Processor;
+    network: (number | Network)[];
+    colors: (number | Color)[];
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'smartphoneSpecs';
+  }[];
+  /**
+   * Auto-generated from title
+   */
+  slug: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -183,6 +223,94 @@ export interface Category {
   description?: string | null;
   createdAt: string;
   updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: number;
+  name: string;
+  slug: string;
+  logoUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "screen-sizes".
+ */
+export interface ScreenSize {
+  id: number;
+  label: string;
+  value: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ram-options".
+ */
+export interface RamOption {
+  id: number;
+  label: string;
+  value: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "storage-options".
+ */
+export interface StorageOption {
+  id: number;
+  label: string;
+  value: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "processors".
+ */
+export interface Processor {
+  id: number;
+  name: string;
+  /**
+   * Only processors linked to a specific brand
+   */
+  brand: number | Brand;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "networks".
+ */
+export interface Network {
+  id: number;
+  label: string;
+  value: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "colors".
+ */
+export interface Color {
+  id: number;
+  label: string;
+  /**
+   * Used as the ID/value (e.g., "black", "gold", "gradient")
+   */
+  value: string;
+  /**
+   * Enter a valid hex color code (e.g., #FFFFFF for white)
+   */
+  hex: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -226,6 +354,34 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'brands';
+        value: number | Brand;
+      } | null)
+    | ({
+        relationTo: 'processors';
+        value: number | Processor;
+      } | null)
+    | ({
+        relationTo: 'screen-sizes';
+        value: number | ScreenSize;
+      } | null)
+    | ({
+        relationTo: 'ram-options';
+        value: number | RamOption;
+      } | null)
+    | ({
+        relationTo: 'storage-options';
+        value: number | StorageOption;
+      } | null)
+    | ({
+        relationTo: 'networks';
+        value: number | Network;
+      } | null)
+    | ({
+        relationTo: 'colors';
+        value: number | Color;
       } | null)
     | ({
         relationTo: 'users';
@@ -290,12 +446,43 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   category?: T;
-  slug?: T;
+  sku?: T;
   description?: T;
+  shortDescription?: T;
   price?: T;
   stock?: T;
+  status?: T;
   rating?: T;
+  totalReviews?: T;
+  bestseller?: T;
+  featured?: T;
+  newArrival?: T;
+  onSale?: T;
+  images?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
   thumbnail?: T;
+  specifications?:
+    | T
+    | {
+        smartphoneSpecs?:
+          | T
+          | {
+              brand?: T;
+              screenSize?: T;
+              ram?: T;
+              storage?: T;
+              processor?: T;
+              network?: T;
+              colors?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  slug?: T;
   createdAt?: T;
   updatedAt?: T;
 }
@@ -309,6 +496,78 @@ export interface CategoriesSelect<T extends boolean = true> {
   description?: T;
   createdAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  logoUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "processors_select".
+ */
+export interface ProcessorsSelect<T extends boolean = true> {
+  name?: T;
+  brand?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "screen-sizes_select".
+ */
+export interface ScreenSizesSelect<T extends boolean = true> {
+  label?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ram-options_select".
+ */
+export interface RamOptionsSelect<T extends boolean = true> {
+  label?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "storage-options_select".
+ */
+export interface StorageOptionsSelect<T extends boolean = true> {
+  label?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "networks_select".
+ */
+export interface NetworksSelect<T extends boolean = true> {
+  label?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "colors_select".
+ */
+export interface ColorsSelect<T extends boolean = true> {
+  label?: T;
+  value?: T;
+  hex?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

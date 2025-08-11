@@ -3,8 +3,15 @@ import {lexicalEditor} from '@payloadcms/richtext-lexical'
 import {postgresAdapter} from '@payloadcms/db-postgres'
 import {buildConfig} from 'payload'
 import {Media} from "@/app/(payload)/collections/Media";
-import {Product} from "@/app/(payload)/collections/Product";
+import {Product} from "@/app/(payload)/collections/blocks/Product/Product";
 import {Category} from "@/app/(payload)/collections/Category";
+import {Brands} from "@/app/(payload)/collections/blocks/Product/Brands";
+import {Processors} from "@/app/(payload)/collections/blocks/Product/Processors";
+import {ScreenSizes} from "@/app/(payload)/collections/blocks/Product/screen-sizes";
+import {RamOptions} from "@/app/(payload)/collections/blocks/Product/ram-options";
+import {StorageOptions} from "@/app/(payload)/collections/blocks/Product/storage-options";
+import {Networks} from "@/app/(payload)/collections/blocks/Product/networks";
+import {Colors} from "@/app/(payload)/collections/blocks/Product/Colors";
 
 export default buildConfig({
     serverURL : process.env.BASE_URL || 'http://localhost:3000',
@@ -12,7 +19,18 @@ export default buildConfig({
     editor: lexicalEditor(),
 
     // Define and configure your collections in this array
-    collections: [Media, Product, Category],
+    collections: [
+        Media,
+        Product,
+        Category,
+        Brands,
+        Processors,
+        ScreenSizes,
+        RamOptions,
+        StorageOptions,
+        Networks,
+        Colors,
+    ],
     routes: {
         admin: '/admin',
     },

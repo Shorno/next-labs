@@ -3,18 +3,18 @@ import PaginationControls from "./pagination-controls";
 import {getProducts} from "@/data/payload/payload";
 
 
-// type ProductsSearchParams = {
-//     page?: number;
-//     sort?: string;
-//     categories?: string[];
-// }
+export type ProductsSearchParams = {
+    page: number;
+    sort: string;
+    categories: string[];
+}
 
-// interface ProductGridProps {
-//     searchParams: ProductsSearchParams;
-// }
+interface ProductGridProps {
+    searchParams: ProductsSearchParams;
+}
 
-export default async function ProductGrid() {
-    const result = await getProducts()
+export default async function ProductGrid({searchParams}: ProductGridProps) {
+    const result = await getProducts(searchParams)
 
     if (!result) {
         return (

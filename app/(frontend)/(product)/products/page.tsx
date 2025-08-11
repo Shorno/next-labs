@@ -8,6 +8,8 @@ import ProductsSortSkeleton from "@/components/product/ProductsSortSkeleton";
 import MobileFilterDrawer from "@/components/product/mobile-filter-drawer";
 import {getProducts} from "@/data/payload/payload";
 
+
+
 interface PageProps {
     searchParams: Promise<SearchParams>
 }
@@ -17,6 +19,8 @@ export default async function ProductsPage({searchParams}: PageProps) {
     const searchParamsData = await loadSearchParams(searchParams)
 
     const result = await getProducts()
+
+    console.log(result)
 
     return (
         <>
@@ -32,7 +36,7 @@ export default async function ProductsPage({searchParams}: PageProps) {
                 </Suspense>
             </div>
             <Suspense fallback={<ProductGridSkeleton/>} key={searchParamsData.page}>
-                <ProductGrid/>
+                <ProductGrid searchParams={searchParamsData}/>
             </Suspense>
         </>
     );
